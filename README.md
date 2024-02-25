@@ -1,3 +1,7 @@
+WARNING
+ this generates a new web request recursively for every line found in the initial site
+ be careful
+
 USE 
  python3 awsMeta.py [options] [url] [port]
 
