@@ -12,7 +12,13 @@ else:
     url = sys.argv[1]
     port = sys.argv[2] if len(sys.argv) == 3 else '80'
 
-address = url + ':' + port
+# add port in correct location
+spl = url.split('/')
+if len(spl) == 3:
+    address = url + ':' + port
+else:
+    spl.insert(3, ':' + port)
+    address = '/'.join(spl[0:3]) + '/'.join(spl[3:])
 
 # initial request
 try:
