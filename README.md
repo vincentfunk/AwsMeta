@@ -2,6 +2,9 @@ WARNING
  this generates a new web request recursively for every line found in the initial site
  be careful
 
+REQUIRES 
+ python3 and requests library
+
 USE 
  python3 awsMeta.py [options] [url] [port]
 
