@@ -12,13 +12,14 @@ else:
     url = sys.argv[1]
     port = sys.argv[2] if len(sys.argv) == 3 else '80'
 
+# scheme check
+if url.find('://') == -1:
+    url = "http://" + url
+
 # add port in correct location
 spl = url.split('/')
-if len(spl) == 3:
-    address = url + ':' + port
-else:
-    spl.insert(3, ':' + port)
-    address = '/'.join(spl[0:3]) + '/'.join(spl[3:])
+spl.insert(3, ':' + port)
+address = '/'.join(spl[0:3]) + '/'.join(spl[3:])
 
 # initial request
 try:
@@ -28,7 +29,7 @@ except requests.exceptions.ConnectionError:
     sys.exit(1)
 
 # recursive requests
-print("Running...", end='\n\n')
+print("Running from...", address, end='\n\n')
 parent = [awsData.AwsData(data, address, parent=None, skp=options) for data in head.text.replace('/', '').split('\n') if data != '']
 
 # output
